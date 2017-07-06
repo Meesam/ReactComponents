@@ -1,9 +1,39 @@
 import React,{Component} from 'react';
+import Notification from './notification.jsx';
 
+
+const style={
+  notify:{
+    position:"absolute",
+    top:100,
+    right:10,
+    opacity:0.83,
+    width:'328px'
+
+  }
+}
 
 export default class Home extends Component{
+  constructor(props){
+    super(props)
+    this.state={
+      notify:false
+    }
+
+    this.infoClick=this.infoClick.bind(this);
+  }
+
+  infoClick(event){
+    event.preventDefault();
+    console.log('info Clicked');
+    this.setState({
+      notify:!this.state.notify
+    })
+  }
+
   render(){
     return(
+    <div>
       <div className="row">
         <div className="col-sm-3 well">
           <div className="well">
@@ -87,14 +117,17 @@ export default class Home extends Component{
               </div>
             </div>
           </div>
+
+
+
         </div>
         <div className="col-sm-2 well">
           <div className="thumbnail">
             <p>Upcoming Events:</p>
             <img src="img/paris.jpg" alt="Paris" width="400" height="300" />
-              <p><strong>Paris</strong></p>
-              <p>Fri. 27 November 2015</p>
-              <button className="btn btn-primary">Info</button>
+            <p><strong>Paris</strong></p>
+            <p>Fri. 27 November 2015</p>
+            <button className="btn btn-primary" onClick={this.infoClick}>Info</button>
           </div>
           <div className="well">
             <p>ADS</p>
@@ -103,7 +136,14 @@ export default class Home extends Component{
             <p>ADS</p>
           </div>
         </div>
+
+
       </div>
+      <div style={style.notify}>
+          {this.state.notify ? <Notification /> :null}
+      </div>
+    </div>
+
     );
   }
 }
