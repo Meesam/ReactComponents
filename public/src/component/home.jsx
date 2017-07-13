@@ -17,10 +17,27 @@ export default class Home extends Component{
   constructor(props){
     super(props)
     this.state={
-      notify:false
+      notify:false,
+      username:'',
+      address:'',
+      mobile:''
     }
 
     this.infoClick=this.infoClick.bind(this);
+    this.submitForm=this.submitForm.bind(this);
+    this.change=this.change.bind(this);
+  }
+
+  change(event){
+    event.preventDefault();
+    this.setState ({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  submitForm(event){
+    event.preventDefault();
+    console.log('sbmit Clicked', this.state);
   }
 
   infoClick(event){
@@ -87,7 +104,23 @@ export default class Home extends Component{
             </div>
             <div className="col-sm-9">
               <div className="well">
-                <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
+               <form>
+                 <div className="row">
+                   <div className="col-sm-12">
+                     <input type="text" name="username" value={this.state.username} onChange={this.change} className="formcontrol"/>
+                   </div>
+                   <div className="col-sm-12">
+                     <input type="text" name="address" value={this.state.address} onChange={this.change} className="formcontrol"/>
+                   </div>
+                   <div className="col-sm-12">
+                     <input type="text" name="mobile" value={this.state.mobile} onChange={this.change} className="formcontrol"/>
+                   </div>
+                   <div className="col-sm-12">
+                     <input type="submit" onClick={this.submitForm} name="Submit" className="btn btn-primary"/>
+                   </div>
+                 </div>
+
+               </form>
               </div>
             </div>
           </div>
