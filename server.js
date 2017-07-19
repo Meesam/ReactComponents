@@ -14,11 +14,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieparser());
 
+app.get('/api/data',function (req,res) {
+   res.json({
+     name:'brijsh',
+     company:'compunnel'
+   })
+})
+
 app.route('/*').get(function(req, res) {
   return res.sendFile(path.join(__dirname+'/public/index.html'));
 
 });
-
 app.listen(3030, function () {
   console.log('Server runing at ' + 3030);
 });
