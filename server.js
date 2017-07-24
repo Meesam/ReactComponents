@@ -6,9 +6,13 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import cookieparser from 'cookie-parser';
 import config from 'config';
-import contoller from './controller/userController';
+import userapi from './api/userapi';
+import clientapi from './api/clientapi';
 
 let app=express();
+
+let publicApi=[userapi];
+
 
 app.use(express.static(path.join(__dirname+'/public')));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -33,17 +37,7 @@ app.get('/api/emp',function (req,res) {
   res.json(data);
 })*/
 
-app.get('/api/emp',function (req,res,next) {
- let data=contoller.getEmployee()
-   .then((data)=>{
-     res.json(data);
-   })
-   .catch((error)=>{
-     next(error)
-   })
-
- })
-
+app.use('/api',publicApi);
 
 app.route('/*').get(function(req, res) {
   return res.sendFile(path.join(__dirname+'/public/index.html'));
