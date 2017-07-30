@@ -39,7 +39,10 @@ app.get('/api/emp',function (req,res) {
   res.json(data);
 })*/
 
-app.use('/api',[authMiddlware,secondMiddlware],privateApi);
+/* uncommment when token is availble in api */
+//app.use('/api',[authMiddlware,secondMiddlware],privateApi);
+
+app.use('/api',privateApi);
 
 app.route('/*').get(function(req, res) {
   return res.sendFile(path.join(__dirname+'/public/index.html'));
